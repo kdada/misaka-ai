@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AIManager" inherits="RefCounted" version="4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../doc/class.xsd">
+	<brief_description>
+		AIManager manages all AI graphs.
+	</brief_description>
+	<description>
+		AIManager maintains all AI graphs and AI instances.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="add">
+			<return type="void" />
+			<param index="0" name="value" type="int" />
+			<description>
+				add() tests the module.
+			</description>
+		</method>
+	</methods>
+</class>
