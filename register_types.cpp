@@ -4,6 +4,7 @@
 #include "core/config/engine.h"
 
 #include "ai_manager.h"
+#include "resources/ai_graph.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/ai_editor_plugin.h"
@@ -19,7 +20,7 @@ void initialize_ai_module(ModuleInitializationLevel p_level) {
 	}
 
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
-		// TODO
+		GDREGISTER_CLASS(AIGraph);
 	}
 
 #ifdef TOOLS_ENABLED
@@ -31,4 +32,8 @@ void initialize_ai_module(ModuleInitializationLevel p_level) {
 }
 
 void uninitialize_ai_module(ModuleInitializationLevel p_level) {
+	if (p_level == MODULE_INITIALIZATION_LEVEL_SERVERS) {
+		Engine::get_singleton()->remove_singleton("AIManager");
+		memdelete(ai_manager);
+	}
 }
