@@ -20,7 +20,9 @@ class AIEditorPlugin : public EditorPlugin {
 	Button *button = nullptr;
 	MenuButton *file_menu = nullptr;
 	ItemList *ai_graph_list = nullptr;
-	GraphEdit *ai_graph_editor = nullptr;
+	TabContainer *tab_container = nullptr;
+
+	LocalVector<Ref<AIGraph>> ai_graphs;
 
 	void _file_menu_item_pressed(int p_index);
 	void _ai_graph_selected(int p_index);

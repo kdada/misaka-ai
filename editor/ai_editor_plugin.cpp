@@ -21,13 +21,31 @@ void AIEditorPlugin::_ai_graph_selected(int p_index) {
 void AIEditorPlugin::_ai_graph_clicked(int p_index, Vector2 p_local_mouse_pos, MouseButton p_mouse_button_index) {
     print_line("click ai graph", p_index);
     if (p_mouse_button_index == MouseButton::LEFT) {
-        ai_graph_editor->set_visible(true);
+        tab_container->set_current_tab(p_index);
     }
 }
 
 void AIEditorPlugin::edit(Object *p_object) {
+	EditorNode::get_singleton()->make_bottom_panel_item_visible(main_container);
     AIGraph *ai_graph = Object::cast_to<AIGraph>(p_object);
-    ai_graph_list->add_item(ai_graph->get_path());
+	for (uint32_t i = 0; i < ai_graphs.size(); i++) {
+        if (ai_graph == ai_graphs[i].ptr()) {
+            ai_graph_list->select(i);
+            tab_container->set_current_tab(i);
+            return;
+        }
+    }
+    ai_graphs.push_back(Ref<AIGraph>(ai_graph));
+    String path = ai_graph->get_path();
+    String file = path.get_file();
+    ai_graph_list->add_item(file);
+    ai_graph_list->set_item_tooltip(ai_graph_list->get_item_count() - 1, path);
+    ai_graph_list->select(ai_graphs.size()-1);
+    GraphEdit *graph_edit = memnew(GraphEdit);
+    GraphNode *node = memnew(GraphNode);
+    node->set_name(ai_graph->get_path());
+    graph_edit->add_child(node);
+    tab_container->add_child(graph_edit);
 }
 
 AIEditorPlugin::AIEditorPlugin() {
@@ -59,13 +77,11 @@ AIEditorPlugin::AIEditorPlugin() {
 
     main_container->add_child(left_sidebar);
 
-    PanelContainer *panel_container = memnew(PanelContainer);
-    panel_container->set_h_size_flags(Control::SIZE_EXPAND_FILL);
-    ai_graph_editor = memnew(GraphEdit);
-    ai_graph_editor->set_visible(false);
-    panel_container->add_child(ai_graph_editor);
+    tab_container = memnew(TabContainer);
+    tab_container->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+    tab_container->set_tabs_visible(false);
 
-    main_container->add_child(panel_container);
+    main_container->add_child(tab_container);
     
     button = EditorNode::get_singleton()->add_bottom_panel_item(TTR("AI Editor"), main_container);
 }

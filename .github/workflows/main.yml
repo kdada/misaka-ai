@@ -37,7 +37,14 @@ jobs:
         python -m pip install scons
         scons --version
         scons platform=windows target=editor tests=true verbose=yes warnings=extra werror=yes module_text_server_fb_enabled=yes debug_symbols=no vsproj=yes
+        Remove-Item bin/* -Include *.exp,*.lib,*.pdb -Force
         ls -l bin/
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-editor
+        path: godot/bin/*
+        retention-days: 14
   build-template:
     name: Build misaka-ai template
     runs-on: windows-2022
@@ -69,4 +76,11 @@ jobs:
         python -m pip install scons
         scons --version
         scons platform=windows target=template_release tests=false verbose=yes warnings=extra werror=yes module_text_server_fb_enabled=yes debug_symbols=no
+        Remove-Item bin/* -Include *.exp,*.lib,*.pdb -Force
         ls -l bin/
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-template
+        path: godot/bin/*
+        retention-days: 14
