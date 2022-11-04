@@ -1,7 +1,7 @@
 #include "editor/editor_scale.h"
-
 #include "../resources/ai_graph.h"
 #include "ai_editor_plugin.h"
+#include "ai_graph_create_dialog.h"
 
 void AIEditorPlugin::_bind_methods() {
 }
@@ -11,7 +11,14 @@ bool AIEditorPlugin::handles(Object *p_object) const {
 }
 
 void AIEditorPlugin::_file_menu_item_pressed(int p_index) {
-    print_line("click menu", p_index);
+    switch (p_index)
+    {
+    case FILE_NEW:
+        ai_graph_create_dialog->popup_centered();
+        break;
+    default:
+        break;
+    }
 }
 
 void AIEditorPlugin::_ai_graph_selected(int p_index) {
@@ -82,6 +89,9 @@ AIEditorPlugin::AIEditorPlugin() {
     tab_container->set_tabs_visible(false);
 
     main_container->add_child(tab_container);
+
+    ai_graph_create_dialog = memnew(AIGraphCreateDialog);
+    main_container->add_child(ai_graph_create_dialog);
     
     button = EditorNode::get_singleton()->add_bottom_panel_item(TTR("AI Editor"), main_container);
 }

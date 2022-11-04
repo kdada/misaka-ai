@@ -5,6 +5,7 @@
 #include "editor/editor_node.h"
 #include "scene/gui/graph_edit.h"
 
+class AIGraphCreateDialog;
 class AIEditorPlugin : public EditorPlugin {
 	GDCLASS(AIEditorPlugin, EditorPlugin);
 
@@ -21,6 +22,7 @@ class AIEditorPlugin : public EditorPlugin {
 	MenuButton *file_menu = nullptr;
 	ItemList *ai_graph_list = nullptr;
 	TabContainer *tab_container = nullptr;
+	AIGraphCreateDialog *ai_graph_create_dialog = nullptr;
 
 	LocalVector<Ref<AIGraph>> ai_graphs;
 
