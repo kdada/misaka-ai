@@ -20,6 +20,7 @@ void initialize_ai_module(ModuleInitializationLevel p_level) {
 	}
 
 	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+		GDREGISTER_CLASS(AINode);
 		GDREGISTER_CLASS(AIGraph);
 	}
 
