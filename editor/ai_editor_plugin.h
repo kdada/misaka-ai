@@ -9,6 +9,7 @@
 
 class AIGraphCreateDialog;
 class GraphEdit;
+class ItemList;
 class AIEditorPlugin : public EditorPlugin {
 	GDCLASS(AIEditorPlugin, EditorPlugin);
 

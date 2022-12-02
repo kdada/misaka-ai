@@ -2,6 +2,9 @@
 #include "../resources/ai_graph.h"
 #include "ai_graph_create_dialog.h"
 #include "editor/editor_scale.h"
+#include "scene/gui/split_container.h"
+#include "scene/gui/menu_button.h"
+#include "scene/gui/item_list.h"
 
 void AIEditorPlugin::_bind_methods() {
 }
