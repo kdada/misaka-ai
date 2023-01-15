@@ -140,7 +140,7 @@ AIEditorPlugin::AIEditorPlugin() {
 	ai_graph_list->set_v_size_flags(Control::SIZE_EXPAND_FILL);
 	ai_graph_list->connect("item_selected", callable_mp(this, &AIEditorPlugin::_ai_graph_selected));
 	ai_graph_list->connect("item_clicked", callable_mp(this, &AIEditorPlugin::_ai_graph_clicked));
-	ai_graph_list->set_drag_forwarding(this);
+	ai_graph_list->set_drag_forwarding_compat(this);
 	left_sidebar->add_child(ai_graph_list);
 
 	main_container->add_child(left_sidebar);
